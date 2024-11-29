@@ -1,0 +1,17 @@
+{
+    "Team A": {
+        "total_votes": 30,
+        "voters": [
+            {"username": "admin", "vote": 10},
+            {"username": "user1", "vote": 10},
+            {"username": "user2", "vote": 10}
+        ]
+    },
+    "Team B": {
+        "total_votes": 15,
+        "voters": [
+            {"username": "user1", "vote": 5},
+            {"username": "admin", "vote": 10}
+        ]
+    }
+}
