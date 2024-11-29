@@ -115,6 +115,18 @@ def vote_for_team(team_name, vote_value, username):
             votes[team_name] = {"total_votes": vote_value, "voters": [{"username": username, "vote": vote_value}]}
             save_votes(votes)
 
+# Function to delete a team
+def delete_team(team_name):
+    if team_name in teams:
+        teams.remove(team_name)
+        save_teams(teams)  # Save the updated team list
+        if team_name in votes:
+            del votes[team_name]  # Delete votes for the team
+            save_votes(votes)  # Save the updated votes data
+        st.success(f"Team '{team_name}' and its votes have been deleted!")
+    else:
+        st.error(f"Team '{team_name}' does not exist!")
+
 # Login form
 if not st.session_state['logged_in']:
     st.title("Login or Register")
@@ -154,6 +166,16 @@ if st.session_state['logged_in']:
     if st.button("Add Team"):
         if team_name:
             add_team(team_name)
+
+    # Delete a team
+    st.subheader("Delete a Team")
+    if teams:
+        team_to_delete = st.selectbox("Select a Team to Delete", teams)
+        if st.button("Delete Team"):
+            if team_to_delete:
+                delete_team(team_to_delete)
+    else:
+        st.warning("No teams available to delete.")
 
     # Vote for a team
     st.subheader("Vote for a Team")
